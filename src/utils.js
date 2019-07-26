@@ -12,6 +12,20 @@ export const geocodeByAddress = address => {
   });
 };
 
+export const geocodeByLocation = location => {
+  const geocoder = new window.google.maps.Geocoder();
+  const OK = window.google.maps.GeocoderStatus.OK;
+
+  return new Promise((resolve, reject) => {
+    geocoder.geocode({ location }, (results, status) => {
+      if (status !== OK) {
+        reject(status);
+      }
+      resolve(results);
+    });
+  });
+};
+
 export const getLatLng = result => {
   return new Promise((resolve, reject) => {
     try {
